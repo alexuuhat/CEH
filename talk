@@ -1,0 +1,60 @@
+[CEH Practical (6 hrs, 20 Lab Questions) +]
+-------------------------------------------
+[Access CEH Tools +]
+smb://172.25.0.11 (Admin / Pa$$w0rd)  
+python -m http.server 80  
+chown -R www-data:www-data /var/www/html/share/  
+chmod -R 755 /var/www/html/share/  
+
+[Exam Topics +]
+Learn when to use the exact tool per question  
+1. Scanning  
+2. Vulnerability Assessment (Nessus, Acunetix, OpenVAS)  
+3. Cryptography + System Hacking (OpenStego, snow) – 2 questions  
+4. Malware Threats  
+5. Sniffing (Wireshark - PCAP analysis)  
+6. DoS (Wireshark)  
+7. Session Hijacking  
+8. Web App, Web Server, SQL Injection – Total 3 questions  
+9. Wireless – 1 question  
+10. Mobile Hacking – 1 question  
+11. IoT Hacking (Use MQTT Wireshark filters)  
+
+[Tips & Tricks +]
+1. Scan all 4 IPs right after exam starts  
+2. Memorize common ports:  
+   - 21 FTP  
+   - 22 SSH  
+   - 53 DNS  
+   - 88 Kerberos  
+   - 389 LDAP  
+   - 443 HTTPS / 445 SMB  
+   - 3389 / 3333 RDP  
+   - 5555 ADB  
+3. Use RDP to connect to Windows host  
+4. Use desktop – On Laptop browser may not go full-screen  
+5. Proctor uses GoToMeeting  
+6. Exam is in iLab (browser-based)  
+7. VMs: Parrot OS & Windows (No Kali)  
+8. Open-book exam (notes, videos, blogs allowed)  
+   - ❌ No personal notes  
+   - ❌ No calls/chats  
+9. No internet on exam VM – use your own browser  
+10. Write down answers manually on a note.txt in case of issues  
+11. Do Linux-based tasks (e.g., Nmap) first and save to Desktop  
+12. Everything is from iLab videos – nothing out of syllabus  
+
+[What to Expect in the Exam +]
+1. Vulnerability analysis of network/systems  
+2. Exploiting systems (e.g., steganography)  
+3. Network scanning and discovering live hosts  
+4. Banner grabbing, service/user enumeration  
+5. Encryption attack techniques  
+6. SQL injection exploitation  
+7. Packet sniffing with Wireshark  
+
+[Practical Exam Useful Links +]
+1. APK Permission Checker: https://sisik.eu/apk-tool  
+=================================================================
+[Theory (4hrs, 125 MCQ)]
+------------------------
