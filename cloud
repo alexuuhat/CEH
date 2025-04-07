@@ -1,0 +1,58 @@
+[Azure AD Enumeration using AADInternals]
+----------------------------------------
+[PowerShell (Run as Administrator)
+# Step 1: Install and import AADInternals module
+Install-Module AADInternals
+Import-Module AADInternals
+
+# Step 2: Perform reconnaissance as an outsider
+Invoke-AADIntReconAsOutsider -DomainName eccouncil.org | Format-Table
+Invoke-AADIntReconAsOutsider -DomainName company.com | Format-Table
+
+# Step 3: User enumeration as an outsider
+Invoke-AADIntUserEnumerationAsOutsider -UserName user@company.com
+Get-Content .\users.txt | Invoke-AADIntUserEnumerationAsOutsider -Method Normal
+
+# Step 4: Get login information
+Get-AADIntLoginInformation -Domain company.com
+Get-AADIntLoginInformation -Domain user@company
+
+# Step 5: Get tenant information
+Get-AADIntTenantID -Domain company.com
+Get-AADIntTenantDomains -Domain company.com
+===================================================
+
+[AWS S3 – Bucket Interaction (Read/Write/Delete)]
+-------------------------------------------------
+# Step 1: List contents of the target S3 bucket
+aws s3 ls s3://certifiedhacker02
+
+# Step 2: Check bucket in browser
+# Visit: http://certifiedhacker02.s3.amazonaws.com/
+
+# Step 3: Create a test file
+echo "You have been Hacked" >> Hack.txt
+
+# Step 4: Move the file to the target bucket
+aws s3 mv Hack.txt s3://certifiedhacker02
+
+# Step 5: Verify file upload
+# Reload in browser: http://certifiedhacker02.s3.amazonaws.com/
+
+# Step 6: Delete the uploaded file from the bucket
+aws s3 rm s3://certifiedhacker02/Hack.txt
+===================================================
+
+[Docker Image Scanning using Trivy]
+-----------------------------------
+# Step 1: Pull the Ubuntu image
+docker pull ubuntu
+
+# Step 2: Scan the Ubuntu image for vulnerabilities
+trivy image ubuntu
+
+# Step 3: Pull a specific version of Nginx image
+docker pull nginx:1.19.6
+
+# Step 4: Scan the Nginx image for vulnerabilities
+trivy image nginx:1.19.6
