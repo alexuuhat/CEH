@@ -1,51 +1,72 @@
-Scenario:
-A mid-sized e-commerce company, SwiftBuy Inc., has suffered a ransomware attack, crippling its online operations. Employees report that files on critical servers have been renamed with a .fun extension, and a ransom note threatens to delete files every hour until payment is made. The attack has triggered panic, as SwiftBuy's customer database and financial records are at risk. The malware was likely introduced through a phishing email and has embedded itself within the system, encrypting files while persistently running in the background. As a Cyber Threat Analyst brought in by SwiftBuy's Incident Response team, your mission is to analyze the ransomware's behavior, locate the encryption routine, and halt the file deletion process before irreversible damage occurs. Your ultimate goal is to track the malware's execution, retrieve potential encryption/decryption keys, and develop a strategy to recover files without paying the ransom.
+# SwiftBuy Inc. Ransomware Attack - Forensics Analysis
 
-Description:
+### Scenario:
+A mid-sized e-commerce company, SwiftBuy Inc., has suffered a ransomware attack, crippling its online operations. Employees report that files on critical servers have been renamed with a `.fun` extension, and a ransom note threatens to delete files every hour until payment is made. The attack has triggered panic, as SwiftBuy's customer database and financial records are at risk. The malware was likely introduced through a phishing email and has embedded itself within the system, encrypting files while persistently running in the background. As a Cyber Threat Analyst brought in by SwiftBuy's Incident Response team, your mission is to analyze the ransomware's behavior, locate the encryption routine, and halt the file deletion process before irreversible damage occurs. Your ultimate goal is to track the malware's execution, retrieve potential encryption/decryption keys, and develop a strategy to recover files without paying the ransom.
+
+### Description:
 The infected machine is a Windows-based system. The challenge involves email analysis, forensic analysis, malware reverse engineering, and decryption techniques to fully understand and mitigate the attack.
-----------------------------------------------------
-Flags
-Challenge 1:
-Analyze the email files (in .html format) located in the Documents directory and identify the suspicious sender’s email address.
-(Answer Format: xxxxxxx@xxxxxxxx-xxxxxx.com)
-=finance@swiftbuy-secure.com
-----------------------------------------------------
-Challenge 2:
-According to Jonathan’s email to the security team, he was asked to download an excel file. Analyze the Phishing email and identify the name of the excel file that was allegedly downloaded.
-(Answer Format: Xxxxxxx_Xxxxxx.xlsx)
-=Invoice_Report.xlsx
 
-#Inspect
-----------------------------------------------------
-Challenge 3:
-Apply your skills to identify the location of the malware binary on the system. Enter its complete path. (Answer Format: X:\Xxxxx\XxxXxxx\XxxXxxx\Xxxxxxx\Xxxx\Xxxxxxxxxxx.xxx)
-=C:\Users\LabUser\AppData\Roaming\Frfx\Firefox.exe
+---
 
-#Autoruns.exe> see the process(unverified)
-----------------------------------------------------
-Challenge 4:
-The binary file found in the previous challenge has a deceptive name that conceals the original ransomware and its family. Analyze the executable to identify the ransomware family it belongs to. (Answer Format: xxxxxx)
-=jigsaw
+## Flags
 
-#virustotal
-----------------------------------------------------
-Challenge 5:
-Decompile the binary file and identify the EncryptionPassword.
-(Answer Format: XxXxXxxXNNxXXXxXXXNXXx==)
-OoIsAwwF23cICQoLDA0ODe==
+### Challenge 1:
+Analyze the email files (in `.html` format) located in the Documents directory and identify the suspicious sender’s email address.  
+(Answer Format: `xxxxxxx@xxxxxxxx-xxxxxx.com`)  
+**Answer**: `finance@swiftbuy-secure.com`
 
-#Tool: JetBrains dotPeek
-----------------------------------------------------
-Challenge 6:
-A file named "Financial_Report.txt" located in the Documents directory has been encrypted by this malware and renamed to "Financial_Report.txt.fun". Can you recover this file and retrieve SwiftBuy’s bank account number? (Answer Format: XXX-NNNN-NNNN)
-=SNB-4597-8697
+---
 
-#Decrypter: https://www.bleepingcomputer.com/download/jigsaw-decrypter/
-----------------------------------------------------
-Challenge 7:
-Remove the malicious files from their current location and clean the artifacts they created from the system. Press the "Validate" button to check if you have successfully completed the task. You have maximum 3 attempts.
+### Challenge 2:
+According to Jonathan’s email to the security team, he was asked to download an excel file. Analyze the Phishing email and identify the name of the excel file that was allegedly downloaded.  
+(Answer Format: `Xxxxxxx_Xxxxxx.xlsx`)  
+**Answer**: `Invoice_Report.xlsx`
 
-#1.Delete with autoruns.exe(close all)
-#2.regedit > ctrl +f (firefox.exe) > change permission (full control) > Delete
-#3.%temp%
-----------------------------------------------------
+# Inspect
+
+---
+
+### Challenge 3:
+Apply your skills to identify the location of the malware binary on the system. Enter its complete path.  
+(Answer Format: `X:\Xxxxx\XxxXxxx\XxxXxxx\Xxxxxxx\Xxxx\Xxxxxxxxxxx.xxx`)  
+**Answer**: `C:\Users\LabUser\AppData\Roaming\Frfx\Firefox.exe`
+
+# Autoruns.exe > see the process (unverified)
+
+---
+
+### Challenge 4:
+The binary file found in the previous challenge has a deceptive name that conceals the original ransomware and its family. Analyze the executable to identify the ransomware family it belongs to.  
+(Answer Format: `xxxxxx`)  
+**Answer**: `jigsaw`
+
+# virustotal
+
+---
+
+### Challenge 5:
+Decompile the binary file and identify the `EncryptionPassword`.  
+(Answer Format: `XxXxXxxXNNxXXXxXXXNXXx==`)  
+**Answer**: `OoIsAwwF23cICQoLDA0ODe==`
+
+# Tool: JetBrains dotPeek
+
+---
+
+### Challenge 6:
+A file named `Financial_Report.txt` located in the Documents directory has been encrypted by this malware and renamed to `Financial_Report.txt.fun`. Can you recover this file and retrieve SwiftBuy’s bank account number?  
+(Answer Format: `XXX-NNNN-NNNN`)  
+**Answer**: `SNB-4597-8697`
+
+# Decrypter: https://www.bleepingcomputer.com/download/jigsaw-decrypter/
+
+---
+
+### Challenge 7:
+Remove the malicious files from their current location and clean the artifacts they created from the system. Press the "Validate" button to check if you have successfully completed the task. You have a maximum of 3 attempts.  
+**Steps**:  
+1. Delete with `autoruns.exe` (close all)  
+2. `regedit` > `ctrl + f` (firefox.exe) > change permission (full control) > Delete  
+3. `%temp%`
+
+---
