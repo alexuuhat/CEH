@@ -50,4 +50,3 @@ Remove the malicious files from their current location and clean the artifacts t
 #1.Delete with autoruns.exe(close all)
 #2.regedit > ctrl +f (firefox.exe) > change permission (full control) > Delete
 #3.%temp%
-----------------------------------------------------
