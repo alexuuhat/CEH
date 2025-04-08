@@ -1,10 +1,10 @@
 [CEH Practical (6 hrs, 20 Lab Questions) +]
 -------------------------------------------
-[Access CEH Tools +]
-smb://172.25.0.11 (Admin / Pa$$w0rd)  
+smb://172.25.0.11 (Admin / Pa$$w0rd)  #Access CEH Tools
 python -m http.server 80  
 chown -R www-data:www-data /var/www/html/share/  
 chmod -R 755 /var/www/html/share/  
+auxiliary/scanner/smb/smb_version #smb version check
 
 [Exam Topics +]
 Learn when to use the exact tool per question  
