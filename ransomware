@@ -1,14 +1,8 @@
 Scenario:
-A mid-sized e-commerce company, SwiftBuy Inc., has suffered a ransomware attack, crippling its online operations. Employees report that files on critical servers have 
-been renamed with a .fun extension, and a ransom note threatens to delete files every hour until payment is made. The attack has triggered panic, as SwiftBuy's customer 
-database and financial records are at risk. The malware was likely introduced through a phishing email and has embedded itself within the system, encrypting files while 
-persistently running in the background. As a Cyber Threat Analyst brought in by SwiftBuy's Incident Response team, your mission is to analyze the ransomware's behavior, 
-locate the encryption routine, and halt the file deletion process before irreversible damage occurs. Your ultimate goal is to track the malware's execution, retrieve 
-potential encryption/decryption keys, and develop a strategy to recover files without paying the ransom.
+A mid-sized e-commerce company, SwiftBuy Inc., has suffered a ransomware attack, crippling its online operations. Employees report that files on critical servers have been renamed with a .fun extension, and a ransom note threatens to delete files every hour until payment is made. The attack has triggered panic, as SwiftBuy's customer database and financial records are at risk. The malware was likely introduced through a phishing email and has embedded itself within the system, encrypting files while persistently running in the background. As a Cyber Threat Analyst brought in by SwiftBuy's Incident Response team, your mission is to analyze the ransomware's behavior, locate the encryption routine, and halt the file deletion process before irreversible damage occurs. Your ultimate goal is to track the malware's execution, retrieve potential encryption/decryption keys, and develop a strategy to recover files without paying the ransom.
 
 Description:
-The infected machine is a Windows-based system. The challenge involves email analysis, forensic analysis, malware reverse engineering, and decryption techniques to 
-fully understand and mitigate the attack.
+The infected machine is a Windows-based system. The challenge involves email analysis, forensic analysis, malware reverse engineering, and cryption techniques to fully understand and mitigate the attack.
 ----------------------------------------------------
 Flags
 Challenge 1:
@@ -17,8 +11,7 @@ Analyze the email files (in .html format) located in the Documents directory and
 =finance@swiftbuy-secure.com
 ----------------------------------------------------
 Challenge 2:
-According to Jonathan’s email to the security team, he was asked to download an excel file. Analyze the Phishing email and identify the name of the excel file that was 
-allegedly downloaded.
+According to Jonathan’s email to the security team, he was asked to download an excel file. Analyze the Phishing email and identify the name of the excel file that was allegedly downloaded.
 (Answer Format: Xxxxxxx_Xxxxxx.xlsx)
 =Invoice_Report.xlsx
 
@@ -32,8 +25,7 @@ xxx.xxx)
 #Autoruns.exe> see the process(unverified)
 ----------------------------------------------------
 Challenge 4:
-The binary file found in the previous challenge has a deceptive name that conceals the original ransomware and its family. Analyze the executable to identify the 
-ransomware family it belongs to. (Answer Format: xxxxxx)
+The binary file found in the previous challenge has a deceptive name that conceals the original ransomware and its family. Analyze the executable to identify the ransomware family it belongs to. (Answer Format: xxxxxx)
 =jigsaw
 
 #virustotal
@@ -53,8 +45,7 @@ this file and retrieve SwiftBuy’s bank account number? (Answer Format: XXX-NNN
 #Decrypter: https://www.bleepingcomputer.com/download/jigsaw-decrypter/
 ----------------------------------------------------
 Challenge 7:
-Remove the malicious files from their current location and clean the artifacts they created from the system. Press the "Validate" button to check if you have 
-successfully completed the task. You have maximum 3 attempts.
+Remove the malicious files from their current location and clean the artifacts they created from the system. Press the "Validate" button to check if you have successfully completed the task. You have maximum 3 attempts.
 
 #1.Delete with autoruns.exe(close all)
 #2.regedit > ctrl +f (firefox.exe) > change permission (full control) > Delete
