@@ -90,6 +90,8 @@ Perform vulnerability scanning for the Linux host in the 192.168.10.0/24 network
 
 [OpenVAS run+ Issue solved]
 docker run -d -p 443:443 –-name openvas mikesplain/openvas
+docker stop openvas
+docker rm openvas
 https://localhost:443
 admin/admin
 #1. Add cidr to Cofiguration
