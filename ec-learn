@@ -61,6 +61,8 @@ nikto -h https://www.certifiedhacker.com -o nikto_results -F txt
 [Lab Answer+]
 Out-of-bounds Write
 docker run -d -p 443:443 –-name openvas mikesplain/openvas
+docker stop openvas
+docker rm openvas
 c2hhcmVkLmJsdWVob3N0LmNvbQ===
 
 ===============================================================
