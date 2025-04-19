@@ -312,7 +312,7 @@ Challenge 9:
 You have recently joined GoodShopping Inc. as a web application security administrator. Eager to understand the security landscape of the company’s website, www.goodshopping.com, you decide to investigate the security updates that have been made over time. Your specific task is to identify the attack category of the oldest Common Vulnerabilities and Exposures (CVEs) affected the website. (Format: aaaaa*aaaa aaaaaaaaaa (AAA) )
 =Cross-site Scripting (XSS)
 
-zap(cve-2020-11023)
+zap > Alerts > Vulnerable Js Libray (cve-2020-11023)/(Check One by one alerts to get CVE info)
 -------------------------------------------
 Challenge 10:
 You are a web penetration tester hired to assess the security of the website www.goodshopping.com. Your primary task is to identify the type of security policies is missing to detect and mitigate Cross-Site Scripting (XSS) and SQL Injection attacks. (Format: Aaaaaaa Aaaaaaaa Aaaaaa)
