@@ -26,7 +26,7 @@ Learn when to use the exact tool per question
 2. Memorize common ports:  
    - 21 FTP  
    - 22 SSH  
-   - 53 DNS  
+   - Domain Controller (53dns, 88kerberos, 135rpc, 445smb,  389ldap)
    - 88 Kerberos  
    - 389 LDAP  
    - 443 HTTPS / 445 SMB  
