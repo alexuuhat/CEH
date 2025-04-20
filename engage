@@ -474,6 +474,7 @@ An attacker has hacked an employee's Android device at CEHORG and initiated a LO
 
 PhoneSploit > /sdcard/music
 find . -iname "*.png"
+eom image.png
 -------------------------------------------
 Challenge 14:
 You have received a folder named "Archive" from a vendor. You suspect that someone might have tampered with the files during transmission. The Original hashes of the files have been sent by the sender separately and are stored in a file named FileHashes.txt stored in the Document folder in the "EH Workstation – 2" machine. Your task is to check the integrity of the files by comparing the MD5 hashes. Compare the hash values and determine the file name that has been tampered with. Note: Exclude the file extension in the answer field. The answer is case-sensitive. (Format: Aaaaaa)
