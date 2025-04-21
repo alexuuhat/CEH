@@ -167,6 +167,9 @@ ldapsearch -h 10.10.10.25 -x -s base namingcontexts #Old version
 ldapsearch -H ldap://10.10.10.25 -x -s base namingcontexts #New version
 -------------------------------------------
 Challenge 3:
+You are assigned a task to crack the NTLM password hashes captured by the internal security team. The password hash has been stored in the Documents folder of the Parrot Security console machine. What is the password of user Jones?
+=qwerty
 
+john -w rockyou.txt --format=NT hashes.txt
 -------------------------------------------
 Challenge 4:
