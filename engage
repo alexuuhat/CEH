@@ -76,6 +76,7 @@ Challenge 12:
 Perform an SMB Enumeration on 172.30.10.200 and check whether the Message signing feature is required. Give your response as Yes/No.
 =NO
 
+nmap -A -T4 -p139,445 172.30.10.200
 nmap -p 445 --script smb2-security-mode 172.30.10.200
 #Not Required
 -------------------------------------------
