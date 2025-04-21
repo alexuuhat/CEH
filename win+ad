@@ -147,3 +147,26 @@ crackmapexec smb 192.168.1.0/24 -u "Administrator" -p "password1" "password2" "I
 
 #Dictionary Attack
 crackmapexec smb 192.168.1.0/24 -u users.txt -p passwords.txt
+========================================================================================================
+[[[[[[[[CEH Engage Style +]]]]]]]
+-------------------------------------------
+Challenge 1:
+Perform LDAP enumeration on the target network and find out how many user accounts are associated with the domain
+=8
+
+#FQDN: AdminDept.CEHORG.com
+ldapsearch -x -h 10.10.10.25 -b "DC=CEHORG,DC=com" "objectclass=user" cn #Old version
+ldapsearch -H ldap://10.10.10.25 -x -b "DC=CEHORG,DC=com" "objectclass=user" cn #New version
+#See only the Domain-related users field
+-------------------------------------------
+Challenge 2:
+Perform an LDAP Search on the Domain Controller machine and find out the version of the LDAP protocol.
+=LDAPv3
+
+ldapsearch -h 10.10.10.25 -x -s base namingcontexts #Old version
+ldapsearch -H ldap://10.10.10.25 -x -s base namingcontexts #New version
+-------------------------------------------
+Challenge 3:
+
+-------------------------------------------
+Challenge 4:
