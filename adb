@@ -3,6 +3,7 @@
 # ---------- Basic ADB Commands ----------
 adb devices                     # List connected devices
 adb start-server                # Start ADB server
+adb connect <phone-ip>:5555	    # Connect Android
 adb kill-server                 # Stop ADB server
 adb shell                       # Open remote shell on device
 adb reboot                      # Reboot the device
