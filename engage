@@ -36,6 +36,7 @@ Challenge 6:
 Perform an intense scan on 192.168.0.222 and find out the DNS_Tree_Name of the machine in the network. (Format: AAAAA.AAA.aaa)
 =SKILL.CEH.com
 
+nmap -sV -sC -O -T5 --open -oN 192.168.0.0_full.txt 192.168.0.0 #(-sV -sC -O is Intense scan) 
 grep DNS_Tree_Name 192.168.0.0_full.txt
 -------------------------------------------
 Challenge 7:
