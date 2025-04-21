@@ -29,15 +29,15 @@ Challenge 5:
 Perform a host discovery scanning and identify the NetBIOS_Domain_Name of the host at 192.168.0.222. (Format: AAAAA.AAA)
 =SKILL.CEH
 
-nmap -sV -sC -T5 --open -oN 192.168.0.0_full.txt  192.168.0.0/24
-grep NeBIOS_Domain_name 192.168.0.0_full.txt
+nmap -sV -sC -T5 --open -oN192.168.0.222_full.txt  192.168.0.222
+grep NeBIOS_Domain_name 192.168.0.222_full.txt
 -------------------------------------------
 Challenge 6:
 Perform an intense scan on 192.168.0.222 and find out the DNS_Tree_Name of the machine in the network. (Format: AAAAA.AAA.aaa)
 =SKILL.CEH.com
 
-nmap -sV -sC -O -T5 --open -oN 192.168.0.0_full.txt 192.168.0.0 #(-sV -sC -O is Intense scan) 
-grep DNS_Tree_Name 192.168.0.0_full.txt
+nmap -sV -sC -O -T5 --open -oN 192.168.0.222_full.txt 192.168.0.222 #(-sV -sC -O is Intense scan) 
+grep DNS_Tree_Name 192.168.0.222_full.txt
 -------------------------------------------
 Challenge 7:
 While performing a security assessment against the CEHORG network, you came to know that one machine in the network is running OpenSSH and is vulnerable. Identify the version of the OpenSSH running on the machine. Note: Target network 192.168.10.0/24. (Format: N.NaN)
