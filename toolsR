@@ -3,8 +3,8 @@ grep -R -i "password" .
 dig axfr @10.0.2.7
 getfacl devel/
 rdesktop -u admin -p password 10.10.193.154
-xfreerdp /u:wade /p:parzival /cert:ignore /v:10.0.2.24
 xfreerdp /u:wade /p:parzival /v:10.0.2.24
+xfreerdp /u:wade /p:parzival /cert:ignore /v:10.0.2.24
 apt install remmina
 steghide info img
 steghide embed -cf rat.jpg -ef secret.txt -p hello123
