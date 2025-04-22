@@ -1,6 +1,6 @@
 # Wireshark Filters Organized by Category
-
-## Basic Filters
+-----------------------------------------
+[[Basic Filters +]]
 
 # Protocol Filters
 tcp.port eq 80                         # same for 443  
@@ -37,9 +37,8 @@ tcp contains "pass"
 # Frame Filters
 frame contains "uname"  
 frame contains "pass"  
-
-## Advanced Filters
-
+=================================================================
+[[Advanced Filters +]]
 # IP and Traffic Exclusions
 !ip.addr ==192.168.0.1               # Exclude specific IP  
 !(arp or icmp or dns)                # Filter out broadcast traffic  
