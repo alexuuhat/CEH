@@ -24,7 +24,6 @@ ip.addr==192.168.1.1                  # Filter traffic from/to this IP
 !(ip.addr==192.168.0.193) and !(ip.addr==192.168.0.1)  
 
 ## Web Traffic Filters
-
 http.host == "testphp.vulnweb.com"   # Finding only http not https  
 http.response.code==200  
 http.request.method=="GET"  
@@ -49,8 +48,8 @@ ip.addr == 192.168.0.193 and ip.addr == 192.168.0.187
 
 # Filtering by IP and Port
 tcp.port == 80 && ip.addr == 192.168.0.1  
-
-## Security & Attack Detection Filters
+==================================================================
+[[Security & Attack Detection Filters +]]
 
 # Three-Way Handshake
 tcp.flags.syn==1 or (tcp.seq==1 and tcp.ack==1 and tcp.len==0 and tcp.analysis.initial_rtt)  
