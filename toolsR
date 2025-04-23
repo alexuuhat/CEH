@@ -28,6 +28,11 @@ curl -A "J"  -L 10.10.165.244
 snow.exe -C -p "test" confidential.txt
 stegsnow -C -p test confidential.txt
 
+#Rpcinfo
+rpcinfo -p 10.11.1.111  # enum NFS shares
+showmount -e 10.11.1.111
+mount -t nfs 10.10.10.180:/site_backups /mnt/  # mount remote share to your local machine
+
 for i in $(seq 0 100); do python heartbleed.py $IP;done
 for i in $(seq 0 12); do echo -n 'base64 -d |';done
 encoded_data=$(cat base64text); for i in {1..13}; do encoded_data=$(echo "$encoded_data" | base64 -d); done; echo "Decoded data: $encoded_data" 
