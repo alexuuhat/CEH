@@ -169,4 +169,14 @@ You are assigned a task to crack the NTLM password hashes captured by the intern
 
 john -w rockyou.txt --format=NT hashes.txt
 -------------------------------------------
-Challenge 4:
+[[[Metasploit mssql+smb module +]]]
+auxiliary/scanner/smb/smb_version       #Check OS and SMB version
+auxiliary/scanner/smb/smb_enumshares    #List SMB shares
+auxiliary/scanner/smb/smb_enumusers     #Enumerate SMB users
+auxiliary/scanner/netbios/nbname        #NetBIOS hostname/workgroup
+auxiliary/scanner/smb/smb_login         #Bruteforce SMB credentials
+exploit/windows/smb/psexec              #Exec via SMB with creds or hash
+exploit/windows/smb/ms17_010_eternalblue #EternalBlue exploit SMBv1
+auxiliary/server/smb_relay              #Relay SMB authentication
+auxiliary/admin/smb/samba_symlink_traversal #Symlink bypass in SMB
+exploit/windows/mssql/mssql_payload     #MSSQL payload drop via SMB
